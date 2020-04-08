@@ -4,7 +4,7 @@ const https = require('https');
 // Solution: Use NodeJs to connect to postman's api to get covid 19 information.
 
 function print_info(total_cases, recovered, deaths){
-    let message = `Total Cases: ${total_cases}, Recovered ${recovered}, Total deaths ${deaths}`;
+    const message = `Total Cases: ${total_cases}, Recovered ${recovered}, Total deaths ${deaths}`;
 
     console.log(message);
 }
@@ -22,7 +22,9 @@ const req = https.get('https://api.covid19api.com/summary', res => {
     res.on('end', ()=>{
          //  Parse the data and 
         const covid19 = JSON.parse(body);
-        console.dir(covid19);
+        // console.dir(covid19);
+
+        print_info(covid19.Global.TotalConfirmed, covid19.Global.NewRecovered, covid19.Global.TotalDeaths); 
     });
    
    
